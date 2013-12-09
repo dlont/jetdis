@@ -21,8 +21,19 @@ int Analysis::BookHistograms()
 	TDirectory* CSDir = HistFile -> mkdir( "CSDir","Cross sections" );
 	CSDir -> cd();
 //!inlusive jets
+      
 	const Int_t n_q2bins_incl = 6;
 	Double_t q2bins_incl[ n_q2bins_incl + 1 ] = { 125., 250., 500., 1000., 2000., 5000., 20000. };
+        
+        TH1F* h_q2_incl_CS_d_cp = new TH1F( "h_q2_incl_CS_d_cp", "Q^{2};Q^{2} (GeV^{2});Number of events", 19900, 100., 20000. );
+	fHistArray -> Add( h_q2_incl_CS_d_cp );
+	
+	TH1F* h_q2_incl_CS_h_cp = new TH1F( "h_q2_incl_CS_h_cp", "Q^{2};Q^{2} (GeV^{2});Number of events", 9950, 100., 20000. );
+	fHistArray -> Add( h_q2_incl_CS_h_cp );
+        
+        TH2F* h_q2_incl_CS_unf_cp = new TH2F( "h_q2_incl_CS_unf_cp", " Q^{2}_{det} vs Q^{2}_{had};Q^{2}_{had};Q^{2}_{det}", 9950, 100., 20000., 19900, 100., 20000. );
+	fHistArray -> Add( h_q2_incl_CS_unf_cp );
+        
 	TH1F* h_q2_incl_CS_d = new TH1F( "h_q2_incl_CS_d", "Q^{2};Q^{2} (GeV^{2});Number of events", n_q2bins_incl, q2bins_incl );
 	fHistArray -> Add( h_q2_incl_CS_d );
 	
@@ -40,9 +51,19 @@ int Analysis::BookHistograms()
 	
 	TH2F* h_q2_incl_CS_unf = new TH2F( "h_q2_incl_CS_unf", " Q^{2}_{det} vs Q^{2}_{had};Q^{2}_{had};Q^{2}_{det}", n_q2bins_incl, q2bins_incl, n_q2bins_incl, q2bins_incl );
 	fHistArray -> Add( h_q2_incl_CS_unf );
-	
+     
 	const Int_t n_etbins_incl = 6;
 	Double_t etbins_incl[ n_etbins_incl + 1 ] = { 8., 10., 14., 18., 25., 35., 100. };
+        	
+        TH1F* h_et_incl_CS_d_cp = new TH1F( "h_et_incl_CS_d_cp", "E^{jet}_{T,B};E^{jet}_{T,B} (GeV);Number of events", 94, 6., 100. );
+	fHistArray -> Add( h_et_incl_CS_d_cp );
+	
+	TH1F* h_et_incl_CS_h_cp = new TH1F( "h_et_incl_CS_h_cp", "E^{jet}_{T,B};E^{jet}_{T,B} (GeV);Number of events", 47, 6., 100. );
+	fHistArray -> Add( h_et_incl_CS_h_cp );
+        
+        TH2F* h_et_incl_CS_unf_cp = new TH2F( "h_et_incl_CS_unf_cp", " E^{jet}_{T,B}_{det} vs E^{jet}_{T,B}_{had};E^{jet}_{T,B}_{had};E^{jet}_{T,B}_{det}", 47, 6., 100., 94, 6., 100. );
+	fHistArray -> Add( h_et_incl_CS_unf_cp );
+        
 	TH1F* h_et_incl_CS_d = new TH1F( "h_et_incl_CS_d", "E^{jet}_{T,B};E^{jet}_{T,B} (GeV);Number of events", n_etbins_incl, etbins_incl );
 	fHistArray -> Add( h_et_incl_CS_d );
 	
@@ -72,6 +93,18 @@ int Analysis::BookHistograms()
 
 	for( UInt_t i_q2bin = 0; i_q2bin < n_q2bins_incl; i_q2bin++ )
 	{
+                TString shistname_d_cp = "h_etinq2_incl_CS_d_cp";		shistname_d_cp += i_q2bin;
+		TH1F* h_etinq2_incl_CS_d_cp = new TH1F( shistname_d_cp, "E^{jet}_{T,B};E^{jet}_{T,B} (GeV);Number of events", 94, 6., 100. );
+		fHistArray -> Add( h_etinq2_incl_CS_d_cp );
+		
+		TString shistname_h_cp = "h_etinq2_incl_CS_h_cp";		shistname_h_cp += i_q2bin;
+		TH1F* h_etinq2_incl_CS_h_cp = new TH1F( shistname_h_cp, "E^{jet}_{T,B};E^{jet}_{T,B} (GeV);Number of events", 47, 6., 100. );
+		fHistArray -> Add( h_etinq2_incl_CS_h_cp );
+                
+                TString shistname_unf_cp = "h_etinq2_incl_CS_unf_cp";		shistname_unf_cp += i_q2bin;
+		TH2F* h_etinq2_incl_CS_unf_cp = new TH2F( shistname_unf_cp, " E^{jet}_{T,B}_{det} vs E^{jet}_{T,B}_{had};E^{jet}_{T,B}_{had};E^{jet}_{T,B}_{det}", 47, 6., 100., 94, 6., 100. );
+		fHistArray -> Add( h_etinq2_incl_CS_unf_cp );
+                
 		TString shistname_d = "h_etinq2_incl_CS_d";		shistname_d += i_q2bin;
 		TH1F* h_etinq2_incl_CS_d = new TH1F( shistname_d, "E^{jet}_{T,B};E^{jet}_{T,B} (GeV);Number of events", n_etinq2bins_incl[ i_q2bin ]-1, &etinq2bins_incl[ i_q2bin ][ 0 ] );
 		fHistArray -> Add( h_etinq2_incl_CS_d );
@@ -99,6 +132,16 @@ int Analysis::BookHistograms()
 //!dijets
 	const Int_t n_q2bins_di = 6;
 	Double_t q2bins_di[ n_q2bins_di + 1 ] = { 125., 250., 500., 1000., 2000., 5000., 20000. };
+        
+        TH1F* h_q2_di_CS_d_cp = new TH1F( "h_q2_di_CS_d_cp", "Q^{2};Q^{2} (GeV^{2});Number of events", 94, 6., 100. );
+	fHistArray -> Add( h_q2_di_CS_d_cp );
+	
+	TH1F* h_q2_di_CS_h_cp = new TH1F( "h_q2_di_CS_h_cp", "Q^{2};Q^{2} (GeV^{2});Number of events", 47, 6., 100. );
+	fHistArray -> Add( h_q2_di_CS_h_cp );
+        
+        TH2F* h_q2_di_CS_unf_cp = new TH2F( "h_q2_di_CS_unf_cp", " Q^{2}_{det} vs Q^{2}_{had};Q^{2}_{had};Q^{2}_{det}", 47, 6., 100., 94, 6., 100. );
+	fHistArray -> Add( h_q2_di_CS_unf_cp );
+        
 	TH1F* h_q2_di_CS_d = new TH1F( "h_q2_di_CS_d", "Q^{2};Q^{2} (GeV^{2});Number of events", n_q2bins_di, q2bins_di );
 	fHistArray -> Add( h_q2_di_CS_d );
 	
@@ -119,6 +162,16 @@ int Analysis::BookHistograms()
 
 	const Int_t n_meanetbins_di = 4;
 	Double_t meanetbins_di[ n_meanetbins_di + 1 ] = { 8., 15., 22., 30., 60. };
+        
+        TH1F* h_meanet_di_CS_d_cp = new TH1F( "h_meanet_di_CS_d_cp", "#bar{E^{jet}_{T,B}};#bar{E^{jet}_{T,B}} (GeV);Number of events", 94, 6., 100. );
+	fHistArray -> Add( h_meanet_di_CS_d_cp );
+	
+	TH1F* h_meanet_di_CS_h_cp = new TH1F( "h_meanet_di_CS_h_cp", "#bar{E^{jet}_{T,B}};#bar{E^{jet}_{T,B}} (GeV);Number of events", 47, 6., 100. );
+	fHistArray -> Add( h_meanet_di_CS_h_cp );
+        
+        TH2F* h_meanet_di_CS_unf_cp = new TH2F( "h_meanet_di_CS_unf_cp", " #bar{E^{jet}_{T,B}}_{det} vs #bar{E^{jet}_{T,B}}_{had};#bar{E^{jet}_{T,B}}_{had};#bar{E^{jet}_{T,B}}_{det}", 47, 6., 100., 94, 6., 100. );
+	fHistArray -> Add( h_meanet_di_CS_unf_cp );
+        
 	TH1F* h_meanet_di_CS_d = new TH1F( "h_meanet_di_CS_d", "#bar{E^{jet}_{T,B}};#bar{E^{jet}_{T,B}} (GeV);Number of events", n_meanetbins_di, meanetbins_di );
 	fHistArray -> Add( h_meanet_di_CS_d );
 	
@@ -148,7 +201,19 @@ int Analysis::BookHistograms()
 
 	for( UInt_t i_q2bin = 0; i_q2bin < n_q2bins_di; i_q2bin++ )
 	{
-		TString shistname_d = "h_meanetinq2_di_CS_d";		shistname_d += i_q2bin;
+		TString shistname_d_cp = "h_meanetinq2_di_CS_d_cp";		shistname_d_cp += i_q2bin;
+		TH1F* h_meanetinq2_di_CS_d_cp = new TH1F( shistname_d_cp, "#bar{E^{jet}_{T,B}};#bar{E^{jet}_{T,B}} (GeV);Number of events", 94, 6., 100. );
+		fHistArray -> Add( h_meanetinq2_di_CS_d_cp );
+		
+		TString shistname_h_cp = "h_meanetinq2_di_CS_h_cp";		shistname_h_cp += i_q2bin;
+		TH1F* h_meanetinq2_di_CS_h_cp = new TH1F( shistname_h_cp, "#bar{E^{jet}_{T,B}};#bar{E^{jet}_{T,B}} (GeV);Number of events", 47, 6., 100. );
+		fHistArray -> Add( h_meanetinq2_di_CS_h_cp );
+                
+                TString shistname_unf_cp = "h_meanetinq2_di_CS_unf_cp";		shistname_unf_cp += i_q2bin;
+		TH2F* h_meanetinq2_di_CS_unf_cp = new TH2F( shistname_unf_cp, " #bar{E^{jet}_{T,B}}_{det} vs #bar{E^{jet}_{T,B}}_{had};#bar{E^{jet}_{T,B}}_{had};#bar{E^{jet}_{T,B}}_{det}", 47, 6., 100., 94, 6., 100. );
+		fHistArray -> Add( h_meanetinq2_di_CS_unf_cp );
+
+                TString shistname_d = "h_meanetinq2_di_CS_d";		shistname_d += i_q2bin;
 		TH1F* h_meanetinq2_di_CS_d = new TH1F( shistname_d, "#bar{E^{jet}_{T,B}};#bar{E^{jet}_{T,B}} (GeV);Number of events", n_meanetinq2bins_di[ i_q2bin ]-1, &meanetinq2bins_di[ i_q2bin ][ 0 ] );
 		fHistArray -> Add( h_meanetinq2_di_CS_d );
 		
@@ -175,6 +240,16 @@ int Analysis::BookHistograms()
 //!trijets
 	const Int_t n_q2bins_tri = 5;
 	Double_t q2bins_tri[ n_q2bins_tri + 1 ] = { 125., 250., 700., 1300., 5000., 20000. };
+        
+        TH1F* h_q2_tri_CS_d_cp = new TH1F( "h_q2_tri_CS_d_cp", "Q^{2};Q^{2} (GeV^{2});Number of events", 94, 6., 100. );
+	fHistArray -> Add( h_q2_tri_CS_d_cp );
+	
+	TH1F* h_q2_tri_CS_h_cp = new TH1F( "h_q2_tri_CS_h_cp", "Q^{2};Q^{2} (GeV^{2});Number of events", 47, 6., 100. );
+	fHistArray -> Add( h_q2_tri_CS_h_cp );
+        
+        TH2F* h_q2_tri_CS_unf_cp = new TH2F( "h_q2_tri_CS_unf_cp", " Q^{2}_{det} vs Q^{2}_{had};Q^{2}_{had};Q^{2}_{det}", 47, 6., 100., 94, 6., 100. );
+	fHistArray -> Add( h_q2_tri_CS_unf_cp );
+        
 	TH1F* h_q2_tri_CS_d = new TH1F( "h_q2_tri_CS_d", "Q^{2};Q^{2} (GeV^{2});Number of events", n_q2bins_tri, q2bins_tri );
 	fHistArray -> Add( h_q2_tri_CS_d );
 	
@@ -195,6 +270,16 @@ int Analysis::BookHistograms()
 
 	const Int_t n_meanetbins_tri = 3;
 	Double_t meanetbins_tri[ n_meanetbins_tri + 1 ] = { 8., 16., 28., 60. };
+        
+        TH1F* h_meanet_tri_CS_d_cp = new TH1F( "h_meanet_tri_CS_d_cp", "#bar{E^{jet}_{T,B}};#bar{E^{jet}_{T,B}} (GeV);Number of events", 94, 6., 100. );
+	fHistArray -> Add( h_meanet_tri_CS_d_cp );
+	
+	TH1F* h_meanet_tri_CS_h_cp = new TH1F( "h_meanet_tri_CS_h_cp", "#bar{E^{jet}_{T,B}};#bar{E^{jet}_{T,B}} (GeV);Number of events", 47, 6., 100. );
+	fHistArray -> Add( h_meanet_tri_CS_h_cp );
+        
+        TH2F* h_meanet_tri_CS_unf_cp = new TH2F( "h_meanet_tri_CS_unf_cp", " #bar{E^{jet}_{T,B}}_{det} vs #bar{E^{jet}_{T,B}}_{had};#bar{E^{jet}_{T,B}}_{had};#bar{E^{jet}_{T,B}}_{det}", 47, 6., 100., 94, 6., 100. );
+	fHistArray -> Add( h_meanet_tri_CS_unf_cp );
+        
 	TH1F* h_meanet_tri_CS_d = new TH1F( "h_meanet_tri_CS_d", "#bar{E^{jet}_{T,B}};#bar{E^{jet}_{T,B}} (GeV);Number of events", n_meanetbins_tri, meanetbins_tri );
 	fHistArray -> Add( h_meanet_tri_CS_d );
 	
@@ -223,7 +308,19 @@ int Analysis::BookHistograms()
 
 	for( UInt_t i_q2bin = 0; i_q2bin < n_q2bins_tri; i_q2bin++ )
 	{
-		TString shistname_d = "h_meanetinq2_tri_CS_d";		shistname_d += i_q2bin;
+		TString shistname_d_cp = "h_meanetinq2_tri_CS_d_cp";		shistname_d_cp += i_q2bin;
+		TH1F* h_meanetinq2_tri_CS_d_cp = new TH1F( shistname_d_cp, "#bar{E^{jet}_{T,B}};#bar{E^{jet}_{T,B}} (GeV);Number of events", 94, 6., 100. );
+		fHistArray -> Add( h_meanetinq2_tri_CS_d_cp );
+		
+		TString shistname_h_cp = "h_meanetinq2_tri_CS_h_cp";		shistname_h_cp += i_q2bin;
+		TH1F* h_meanetinq2_tri_CS_h_cp = new TH1F( shistname_h_cp, "#bar{E^{jet}_{T,B}};#bar{E^{jet}_{T,B}} (GeV);Number of events", 47, 6., 100. );
+		fHistArray -> Add( h_meanetinq2_tri_CS_h_cp );
+                
+                TString shistname_unf_cp = "h_meanetinq2_tri_CS_unf_cp";		shistname_unf_cp += i_q2bin;
+		TH2F* h_meanetinq2_tri_CS_unf_cp = new TH2F( shistname_unf_cp, " #bar{E^{jet}_{T,B}}_{det} vs #bar{E^{jet}_{T,B}}_{had};#bar{E^{jet}_{T,B}}_{had};#bar{E^{jet}_{T,B}}_{det}", 47, 6., 100., 94, 6., 100. );
+		fHistArray -> Add( h_meanetinq2_tri_CS_unf_cp );
+                
+                TString shistname_d = "h_meanetinq2_tri_CS_d";		shistname_d += i_q2bin;
 		TH1F* h_meanetinq2_tri_CS_d = new TH1F( shistname_d, "#bar{E^{jet}_{T,B}};#bar{E^{jet}_{T,B}} (GeV);Number of events", n_meanetinq2bins_tri[ i_q2bin ]-1, &meanetinq2bins_tri[ i_q2bin ][ 0 ] );
 		fHistArray -> Add( h_meanetinq2_tri_CS_d );
 		

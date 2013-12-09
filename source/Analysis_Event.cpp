@@ -471,6 +471,20 @@ INCLJETS:
 		}
 
 		//Incl. jets cross sections
+                
+                if ( !fSettings->is_data() && ishad_incl == true )
+                {
+                    hist = (TH1F*)(fHistArray) -> FindObject("h_q2_incl_CS_h_cp");
+                    hist -> Fill( jet_ev_true.Get_q2_true() );
+
+                    hist = (TH1F*)(fHistArray) -> FindObject("h_q2_incl_CS_d_cp");
+                    hist -> Fill( jet_ev.Get_q2_da() );
+                    
+                    hist2d = (TH2F*)(fHistArray) -> FindObject("h_q2_incl_CS_unf_cp");
+                    hist2d -> Fill( jet_ev_true.Get_q2_true(), jet_ev.Get_q2_da() );
+                }
+                
+                
 		for( unsigned int ijet = 0; ijet < kt_injets_breit_corr.size(); ijet++ )
 		{
 			hist = (TH1F*)(fHistArray) -> FindObject("h_q2_incl_CS_d");
