@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<Program>
+	<!-- Settings for analysis program -->
+	<Sample isdata="false" nevents="100000">
+		<SampleName name="05e_lepto">
+			<Correction name="enescalecorr" iseval="true" isapply="true" filename="etscalecorr_lepto.xml"/>
+			<Correction name="etcorr" iseval="true" isapply="false" filename="etcorr.txt"/>
+			<Correction name="zvtxrew" iseval="false" isapply="true" filename="zvtxreweighting_func.root"/>
+		</SampleName>
+	</Sample>
+</Program>

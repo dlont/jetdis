@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<Program>
+	<!-- Settings for analysis program -->
+	<Sample isdata="true" nevents="-1">
+		<SampleName name="05e12">
+			<Correction name="etcorr" iseval="false" isapply="true" filename="etcorr_05e_lepto.xml"/>
+		</SampleName>
+	</Sample>
+</Program>

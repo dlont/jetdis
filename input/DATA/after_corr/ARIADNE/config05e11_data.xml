@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<Program>
+	<!-- Settings for analysis program -->
+	<Sample isdata="true" nevents="-1">
+		<SampleName name="05e11">
+			<Correction name="etcorr" iseval="false" isapply="true" filename="etcorr_05e_ariadne.xml"/>
+		</SampleName>
+	</Sample>
+</Program>
+

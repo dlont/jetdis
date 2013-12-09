@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<Program>
+	<!-- Settings for analysis program -->
+	<Sample isdata="false" nevents="-1">
+		<SampleName name="07p_lepto">
+			<Correction name="enescalecorr" iseval="false" isapply="true" filename="etscalecorr_07p_lepto.xml"/>
+                        <Correction name="etcorr" iseval="false" isapply="true" filename="etcorr_07p_lepto.xml"/>
+			<Correction name="zvtxrew" iseval="false" isapply="true" filename="zvtxreweighting_func_lepto_v1.root"/>
+			<Correction name="trackvetorew_incl" iseval="false" isapply="true" filename="fit_func_tvrew_lepto_07p_syst_incl.root"/>
+			<Correction name="trackvetorew_di" iseval="false" isapply="true" filename="fit_func_tvrew_lepto_07p_syst_di.root"/>
+			<Correction name="q2rew_incl" iseval="false" isapply="true" filename="fit_func_q2rew_lepto_incl.root"/>
+			<Correction name="q2rew_di" iseval="false" isapply="true" filename="fit_func_q2rew_lepto_di.root"/>
+		</SampleName>
+	</Sample>
+</Program>

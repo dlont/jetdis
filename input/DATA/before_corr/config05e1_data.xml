@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<Program>
+	<!-- Settings for analysis program -->
+	<Sample isdata="true" nevents="-1">
+		<SampleName name="05e01">
+			<Correction name="enescalecorr" iseval="false" isapply="false" filename="nofile.txt"/>
+		</SampleName>
+	</Sample>
+</Program>
+
+

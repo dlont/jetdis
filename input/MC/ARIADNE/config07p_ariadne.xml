@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<Program>
+	<!-- Settings for analysis program -->
+	<Sample isdata="false" nevents="-1">
+		<SampleName name="07p_ariadne">
+			<Correction name="enescalecorr" iseval="false" isapply="false" filename="etscalecorr_07p_ariadne.xml"/>
+                        <Correction name="etcorr" iseval="false" isapply="false" filename="noname.xml"/>
+		</SampleName>
+	</Sample>
+</Program>

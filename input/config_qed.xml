@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<Program>
+	<!-- Settings for analysis program -->
+	<Sample isdata="false" nevents="-1">
+		<SampleName name="qedin_sample">
+		<Correction name="qedZ0corr" iseval="true" isapply="false" filename="nofile.xml"/>
+		</SampleName>
+	</Sample>
+</Program>

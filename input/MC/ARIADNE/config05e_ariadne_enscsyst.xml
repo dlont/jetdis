@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<Program>
+	<!-- Settings for analysis program -->
+	<Sample isdata="false" nevents="-1">
+		<SampleName name="05e_ariadne">
+			<Correction name="enescalecorr" iseval="false" isapply="true" filename="etscalecorr_05e_ariadne.xml"/>
+                        <Correction name="etcorr" iseval="false" isapply="true" filename="etcorr_05e_ariadne.xml"/>
+			<Correction name="zvtxrew" iseval="false" isapply="false" filename="zvtxreweighting_func_ariadne_v1.root"/>
+			<Correction name="trackvetorew_incl" iseval="false" isapply="true" filename="fit_func_tvrew_ariadne_05e_incl.root"/>
+			<Correction name="trackvetorew_di" iseval="false" isapply="true" filename="fit_func_tvrew_ariadne_05e_di.root"/>
+			<Correction name="q2rew_incl" iseval="false" isapply="true" filename="fit_func_q2rew_ariadne_incl.root"/>
+			<Correction name="q2rew_di" iseval="false" isapply="true" filename="fit_func_q2rew_ariadne_di.root"/>
+			<Correction name="enescalesyst" iseval="true" isapply="false" filename="nofile.xml"/>
+		</SampleName>
+	</Sample>
+</Program>
