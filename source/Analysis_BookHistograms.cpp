@@ -57,6 +57,9 @@ int Analysis::BookHistograms()
         	
         TH1F* h_et_incl_CS_d_cp = new TH1F( "h_et_incl_CS_d_cp", "E^{jet}_{T,B};E^{jet}_{T,B} (GeV);Number of events", 94, 6., 100. );
 	fHistArray -> Add( h_et_incl_CS_d_cp );
+        
+        TH1F* h_et_incl_CS_d_cp_b = new TH1F( "h_et_incl_CS_d_cp_b", "E^{jet}_{T,B};E^{jet}_{T,B} (GeV);Number of events", 94, 6., 100. );
+	fHistArray -> Add( h_et_incl_CS_d_cp_b );
 	
 	TH1F* h_et_incl_CS_h_cp = new TH1F( "h_et_incl_CS_h_cp", "E^{jet}_{T,B};E^{jet}_{T,B} (GeV);Number of events", 47, 6., 100. );
 	fHistArray -> Add( h_et_incl_CS_h_cp );

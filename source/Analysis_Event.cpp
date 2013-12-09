@@ -127,6 +127,12 @@ HADRLEVEL:
 		ishad_incl = true;
 
 		//Incl. jets cross sections
+                if ( kt_injets_hadr_breit.size() == 1 )
+                {
+                        hist = (TH1F*)(fHistArray) -> FindObject("h_et_incl_CS_h_cp");
+			hist -> Fill( kt_injets_hadr_breit[ 0 ].perp(), w_incl );
+                }
+                
 		for( int ijet = 0; ijet < kt_injets_hadr_breit.size(); ijet++ )
 		{
 			hist = (TH1F*)(fHistArray) -> FindObject("h_q2_incl_CS_h");
@@ -481,9 +487,50 @@ INCLJETS:
                     hist -> Fill( jet_ev.Get_q2_da() );
                     
                     hist2d = (TH2F*)(fHistArray) -> FindObject("h_q2_incl_CS_unf_cp");
-                    hist2d -> Fill( jet_ev_true.Get_q2_true(), jet_ev.Get_q2_da() );
-                }
-                
+                    hist2d -> Fill( jet_ev_true.Get_q2_true(), jet_ev.Get_q2_da() );               
+
+                    // Olaf's plots
+                    if ( kt_injets_hadr_breit.size() == 1 )// 1-jet only events at hadron level
+                    {
+                        if ( kt_injets_breit_corr.size() == 1 )// 1-jet only events at detector level
+                        {
+                            // Look for matching detector jet
+                            double deta = ( kt_injets_hadr_breit[0].eta() - kt_injets_breit_corr[0].eta() );
+                            double dphi = ( kt_injets_hadr_breit[0].phi() - kt_injets_breit_corr[0].phi() );
+                            double dr = deta*deta + dphi*dphi;
+                            if ( dr < 1 )// found exactly one matched jet (Resolution matrix, acceptance correction)
+                            {
+                                hist2d = (TH2F*)(fHistArray) -> FindObject("h_et_incl_CS_unf_cp");
+                                hist2d -> Fill( kt_injets_hadr_breit[0].perp(), kt_injets_breit_corr[0].perp(), w_incl );
+
+                                hist = (TH1F*)(fHistArray) -> FindObject("h_et_incl_CS_d_cp");
+                                hist -> Fill( kt_injets_breit_corr[0].perp(), w_incl );
+                            }
+                            // found different detector level jet (Background vector)
+                            else
+                            {
+                                hist = (TH1F*)(fHistArray) -> FindObject("h_et_incl_CS_d_cp_b");
+                                hist -> Fill( kt_injets_breit_corr[0].perp(), w_incl );
+                            }
+                        }
+                        // 0 or more than 1 jet at detector level
+                        else
+                        {
+                            if ( kt_injets_breit_corr.size() == 0 )// no jets at detector level (acceptance correction)
+                            {
+                                // ? increase acceptance counter
+                            } 
+                            else if ( kt_injets_breit_corr.size() > 1 ) // more than one jet at detector level
+                            {                                       
+                                for( unsigned int ijet = 0; ijet < kt_injets_breit_corr.size(); ijet++ ) 
+                                {
+                                        hist = (TH1F*)(fHistArray) -> FindObject("h_et_incl_CS_d_cp_b");
+                                        hist -> Fill( kt_injets_breit_corr[ijet].perp(), w_incl );
+                                }
+                            }
+                        }
+                    }
+                } // if ( !fSettings->is_data() && ishad_incl == true )
                 
 		for( unsigned int ijet = 0; ijet < kt_injets_breit_corr.size(); ijet++ )
 		{
