@@ -25,13 +25,13 @@ int Analysis::BookHistograms()
 	const Int_t n_q2bins_incl = 6;
 	Double_t q2bins_incl[ n_q2bins_incl + 1 ] = { 125., 250., 500., 1000., 2000., 5000., 20000. };
         
-        TH1F* h_q2_incl_CS_d_cp = new TH1F( "h_q2_incl_CS_d_cp", "Q^{2};Q^{2} (GeV^{2});Number of events", 19900, 100., 20000. );
+        TH1F* h_q2_incl_CS_d_cp = new TH1F( "h_q2_incl_CS_d_cp", "Q^{2};Q^{2} (GeV^{2});Number of events", 1990, 100., 20000. );
 	fHistArray -> Add( h_q2_incl_CS_d_cp );
 	
-	TH1F* h_q2_incl_CS_h_cp = new TH1F( "h_q2_incl_CS_h_cp", "Q^{2};Q^{2} (GeV^{2});Number of events", 9950, 100., 20000. );
+	TH1F* h_q2_incl_CS_h_cp = new TH1F( "h_q2_incl_CS_h_cp", "Q^{2};Q^{2} (GeV^{2});Number of events", 995, 100., 20000. );
 	fHistArray -> Add( h_q2_incl_CS_h_cp );
         
-        TH2F* h_q2_incl_CS_unf_cp = new TH2F( "h_q2_incl_CS_unf_cp", " Q^{2}_{det} vs Q^{2}_{had};Q^{2}_{had};Q^{2}_{det}", 9950, 100., 20000., 19900, 100., 20000. );
+        TH2F* h_q2_incl_CS_unf_cp = new TH2F( "h_q2_incl_CS_unf_cp", " Q^{2}_{det} vs Q^{2}_{had};Q^{2}_{had};Q^{2}_{det}", 995, 100., 20000., 1990, 100., 20000. );
 	fHistArray -> Add( h_q2_incl_CS_unf_cp );
         
 	TH1F* h_q2_incl_CS_d = new TH1F( "h_q2_incl_CS_d", "Q^{2};Q^{2} (GeV^{2});Number of events", n_q2bins_incl, q2bins_incl );
