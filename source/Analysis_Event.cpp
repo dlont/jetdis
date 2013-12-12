@@ -480,6 +480,19 @@ INCLJETS:
                 
                 if ( !fSettings->is_data() && ishad_incl == true )
                 {
+                    unfoldingVariables.flush();
+                    
+                    unfoldingVariables.q2reco = jet_ev.Get_q2_da();
+                    unfoldingVariables.q2true = jet_ev_true.Get_q2_true();
+                    
+                    unfoldingVariables.yreco = jet_ev.Get_y_da();
+                    unfoldingVariables.ytrue = jet_ev_true.Get_y_true();
+                    
+                    unfoldingVariables.njetstrue = (int)kt_injets_hadr_breit.size();
+                    unfoldingVariables.njetsreco = (int)kt_injets_breit_corr.size();
+                    
+                    fUnfoldingTree -> Fill();
+                    
                     hist = (TH1F*)(fHistArray) -> FindObject("h_q2_incl_CS_h_cp");
                     hist -> Fill( jet_ev_true.Get_q2_true() );
 
@@ -487,7 +500,7 @@ INCLJETS:
                     hist -> Fill( jet_ev.Get_q2_da() );
                     
                     hist2d = (TH2F*)(fHistArray) -> FindObject("h_q2_incl_CS_unf_cp");
-                    hist2d -> Fill( jet_ev_true.Get_q2_true(), jet_ev.Get_q2_da() );               
+                    hist2d -> Fill( jet_ev.Get_q2_da(), jet_ev_true.Get_q2_true() );               
 
                     // Olaf's plots
                     if ( kt_injets_hadr_breit.size() == 1 )// 1-jet only events at hadron level
@@ -501,7 +514,7 @@ INCLJETS:
                             if ( dr < 1 )// found exactly one matched jet (Resolution matrix, acceptance correction)
                             {
                                 hist2d = (TH2F*)(fHistArray) -> FindObject("h_et_incl_CS_unf_cp");
-                                hist2d -> Fill( kt_injets_hadr_breit[0].perp(), kt_injets_breit_corr[0].perp(), w_incl );
+                                hist2d -> Fill( kt_injets_breit_corr[0].perp(), kt_injets_hadr_breit[0].perp(), w_incl );
 
                                 hist = (TH1F*)(fHistArray) -> FindObject("h_et_incl_CS_d_cp");
                                 hist -> Fill( kt_injets_breit_corr[0].perp(), w_incl );

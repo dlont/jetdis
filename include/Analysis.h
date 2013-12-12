@@ -63,20 +63,60 @@ class Analysis
 	virtual int BookHistograms();
 	virtual int BookBranches();
 	virtual int WriteHistograms();
+        virtual int WriteMiniUnfolding();
 	virtual int WriteOutput();
 	virtual int WriteEventList();
 	
  private:
 	//!Chain of files to be analyzed
 	TChain 					*fChain;
-	//!Tree of filltered events
+	//!Tree of filtered events
 	TTree                                   *fOutTree;
 	//!Name of the histogram file
 	string 					fHistogramFileName;
 	//!Name of file with filtered events
 	string 					fOutputFileName;
-	//!ROOT file with ouput histograms
+	//!ROOT file with output histograms
 	TFile* 					HistFile;
+        //!ROOT file with trees of input for unfolding
+        TFile*                                  MiniUnfoldingFile;
+        //!Tree of unfolding input
+        TTree                                   *fUnfoldingTree;
+        //!Structure that holds unfolding ntuple variables
+        struct UnfoldingInput {
+            float q2true;
+            float q2reco;
+            
+            float ytrue;
+            float yreco;
+            
+            // jet variables
+            int njetstrue;
+            float jet_et_true[10];
+            float jet_eta_true[10];
+            int njetsreco;
+            float jet_et_reco[10];
+            float jet_eta_reco[10];
+            
+            void flush() {
+                q2true = 0.;
+                q2reco = 0.;
+                
+                ytrue = 0.;
+                yreco = 0.;
+                
+                njetstrue = 0;
+                njetsreco = 0;
+                
+                for ( int i = 0; i < 10; ++i ) {
+                    jet_et_true[i] = 0.;
+                    jet_et_reco[i] = 0.;
+                    jet_eta_true[i] = 0.;
+                    jet_eta_reco[i] = 0.;
+                }
+            }
+            
+        } unfoldingVariables;
 	//!Name of file with event list
 	string					fEvenListFileName;
 	//!Period of reporting during execution
@@ -91,7 +131,7 @@ class Analysis
 	TObjArray				*fHistArray;
 	//!Array of Ntuples to be filled
 	TObjArray               *fNtupleArray;
-	//!Pointer to list with selected enties
+	//!Pointer to list with selected entries
 	TEventList              *fEventList;
 	//!Pointer to program settings
 	Settings                *fSettings;

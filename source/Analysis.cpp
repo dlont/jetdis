@@ -34,6 +34,7 @@ int Analysis::Finalize()
 {
 	WriteEventList();
 	WriteHistograms();
+        WriteMiniUnfolding();
 	WriteOutput();
 	
 	return 0;
@@ -154,6 +155,17 @@ int Analysis::WriteHistograms()
 	HistFile->Write();
 	HistFile->Close();
 	delete HistFile;
+
+	return 0;
+}
+
+//!Write histograms to the file
+int Analysis::WriteMiniUnfolding()
+{
+	MiniUnfoldingFile->cd();	
+	MiniUnfoldingFile->Write();
+	MiniUnfoldingFile->Close();
+	delete MiniUnfoldingFile;
 
 	return 0;
 }
