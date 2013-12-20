@@ -3,7 +3,7 @@
 using namespace std;
 
 const Int_t numberOfRootFiles06p = 2000;
-string prefixFiles06p="zeus://acs/z/ntup/06p/v08b/data/root/";
+string prefixFiles06p="dcap://dcap.desy.de/pnfs/desy.de/usr/zeus/z/ntup/06p/v08b/data/root/";
 TString rootFiles06p[numberOfRootFiles06p] =
 {
 "data_06p_60005_60010_01.root",

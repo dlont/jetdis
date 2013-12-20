@@ -5,7 +5,7 @@
 using namespace std;
 
 const Int_t numberOfRootFiles04p = 1125;
-string prefixFiles04p="zeus://acs/z/ntup/04/v08b/data/root/";
+string prefixFiles04p="dcap://dcap.desy.de/pnfs/desy.de/usr/zeus/z/ntup/04/v08b/data/root/";
 TString rootFiles04p[numberOfRootFiles04p] =
 {
 "data_04_47010_47098_01.root",

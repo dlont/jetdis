@@ -4,7 +4,7 @@
 using namespace::std;
 
 const Int_t numberOfRootFilesARIADNE05e = 288;
-string prefixFilesARIADNE05e="zeus://acs/z/ntup/05/v08b/mc/root/";
+string prefixFilesARIADNE05e="dcap://dcap.desy.de/pnfs/desy.de/usr/zeus/z/ntup/05/v08b/mc/root/";
 TString rootFilesARIADNE05e[numberOfRootFilesARIADNE05e] =
 {
 "zeusmc.hdsbf25.h14207.djangoh.cdm.ele.q2100.gnor001.root",

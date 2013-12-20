@@ -4,7 +4,7 @@
 using namespace::std;
 
 const Int_t numberOfRootFilesLEPTO07p = 400;
-string prefixFilesLEPTO07p="zeus://acs/z/ntup/07p/v08b/mc/root/";
+string prefixFilesLEPTO07p="dcap://dcap.desy.de/pnfs/desy.de/usr/zeus/z/ntup/07p/v08b/mc/root/";
 TString rootFilesLEPTO07p[numberOfRootFilesLEPTO07p] =
 {
 "zeusmc.hfix627.h14207.djangoh.meps.pos.q2100.gnor001.root",
