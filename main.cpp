@@ -29,9 +29,9 @@ using namespace std;
 
 int CheckArguments( int argc, char** argv )
 {
-        if( argc <= 1 || argc > 2 ) {
+        if( argc <= 1 || argc > 3 ) {
                 cerr << "Wrong usage." << endl;
-                cerr << "Usage: program.exe <filename.xml>" << endl;
+                cerr << "Usage: program.exe <filename.xml> <output folder>" << endl;
 
                 return 100;
         }
@@ -52,6 +52,10 @@ int main(int argc, char** argv)
 
 	Settings st;
         st.LoadSettingsFromFile( argv[1] );
+
+	// Read output destination folder from command line
+        TString strOutputFolder( "./" );
+        if ( argc == 3 ) strOutputFolder = argv[2];
 
 	TChain *ch = new TChain("orange");
 	//if( st.GetSampleName().find("testcn_05e") != string::npos )
@@ -138,17 +142,19 @@ int main(int argc, char** argv)
 	a.SetFilteringMode(false);
 // 	a.SetHistogramFile("out/testHist_data.root");
 // 	a.SetOutputFile("out/testMini_data.root");
-	TString strHistFileName;
-	TString strMiniFileName;
-	if( st.is_data() ) { strHistFileName = "Hist_data"; strMiniFileName = "Mini_data"; }
-	if( !st.is_data() ) { strHistFileName = "Hist_mc"; strMiniFileName = "Mini_mc"; }
+	TString strHistFileName=strOutputFolder;
+	TString strMiniFileName=strOutputFolder;
+	if( st.is_data() ) { strHistFileName += "Hist_data"; strMiniFileName += "Mini_data"; }
+	if( !st.is_data() ) { strHistFileName += "Hist_mc"; strMiniFileName += "Mini_mc"; }
 	strHistFileName += TString( st.GetSampleName() );
 	strHistFileName += ".root";
 	strMiniFileName += TString( st.GetSampleName() );
 	strMiniFileName += ".root";
+	std::cout << "Output histogram file: " << strHistFileName.Data() << std::endl;
 	a.SetHistogramFile( strHistFileName.Data() );
 //	a.SetOutputFile( strMiniFileName.Data() );
-	
+
+
 	a.SetReport(100000);
 	
 	a.Initialize();
