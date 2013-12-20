@@ -12,6 +12,7 @@ AR		= ar
 ARFLAGS		= rcs
 #Includes and libraries
 INCLUDE		= -I./include
+FASTEJETINCLUDE	= -I./fastjet/include
 
 ROOTFLAGS	= $(shell root-config --nonew --cflags)
 CLHEPFLAGS	= -I/opt/products/CLHEP/2.0.3.1/include
@@ -19,11 +20,12 @@ CLHEPFLAGS	= -I/opt/products/CLHEP/2.0.3.1/include
 ROOTLIBS	= $(shell root-config --nonew --libs)
 CERNLIBS	= $(shell cernlib packlib,mathlib,kernlib)
 CLHEPLIBS	= -L/opt/products/CLHEP/2.0.3.1/lib -lCLHEP
-FASTJETLIBS     = -L./lib -lfastjet
+FASTJETLIBS     = -L./fastjet/lib -lfastjet
 DCACHELIBS	= -L/afs/desy.de/group/zeus/zacon/Released/zeus/zio/v0.6.2/lib/i586-sl4-linux -lzio
 DCACHELIBS	+= -L/opt/products/lib/ -ldcap
 
-CXXFLAGS	+= $(ROOTFLAGS)
+CXXFLAGS	+= $(ROOTFLAGS) 
+CXXFLAGS	+= $(FASTEJETINCLUDE)
 CXXFLAGS	+= $(CLHEPFLAGS)
 
 #Distanation path
@@ -57,7 +59,8 @@ all: main.exe
 
 main.exe: Dijets.o Analysis.o Analysis_Event.o Analysis_Initialize.o Analysis_BookHistograms.o Analysis_BookBranches.o Variables_$(RELINKTARG).o JetEvent.o \
           Cuts.o Excludedrunlist.o poltake.o runinfo.o Jets.o JetUserInfo.o JetSelectors.o EtCorrections.o EtTransformer.o DijetVariables.o TrijetVariables.o $(DEPENDENCIES) Settings.o tinystr.o tinyxml.o tinyxmlerror.o tinyxmlparser.o main.o
-	$(LD)	$(LDFLAGS) $(ROOTLIBS) $(FASTJETLIBS) $(CLHEPLIBS) $(DCACHELIBS) $^ -o $@
+	#$(LD)	$(LDFLAGS) $(ROOTLIBS) $(FASTJETLIBS) $(CLHEPLIBS) $(DCACHELIBS) $^ -o $@
+	$(LD)	$(LDFLAGS) $(ROOTLIBS) $(FASTJETLIBS) $^ -o $@
 
 .cpp.o:
 	$(CXX) $(CXXFLAGS) $(INCLUDE) -c $<
