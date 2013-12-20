@@ -245,9 +245,7 @@ int Analysis::Initialize()
         
         //Book mini-ntuples for unfolding
         TString strMiniUnfoldFileName(fHistogramFileName.c_str());
-        TObjArray* strTokens = strMiniUnfoldFileName.Tokenize(".");
-        strMiniUnfoldFileName = dynamic_cast<TObjString*>( strTokens->At( 0 ) )->GetString();
-        strMiniUnfoldFileName += "_miniUnfolding.root";
+	strMiniUnfoldFileName.ReplaceAll("Hist","MiniUnfolding");
         
         MiniUnfoldingFile = new TFile( strMiniUnfoldFileName, "RECREATE" );
         fUnfoldingTree = new TTree("Unfolding", "Unfolding input");
