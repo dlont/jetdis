@@ -15,18 +15,18 @@ INCLUDE		= -I./include
 FASTEJETINCLUDE	= -I./fastjet/include
 
 ROOTFLAGS	= $(shell root-config --nonew --cflags)
-CLHEPFLAGS	= -I/opt/products/CLHEP/2.0.3.1/include
+#CLHEPFLAGS	= -I/opt/products/CLHEP/2.0.3.1/include
 
 ROOTLIBS	= $(shell root-config --nonew --libs)
 CERNLIBS	= $(shell cernlib packlib,mathlib,kernlib)
-CLHEPLIBS	= -L/opt/products/CLHEP/2.0.3.1/lib -lCLHEP
+#CLHEPLIBS	= -L/opt/products/CLHEP/2.0.3.1/lib -lCLHEP
 FASTJETLIBS     = -L./fastjet/lib -lfastjet
-DCACHELIBS	= -L/afs/desy.de/group/zeus/zacon/Released/zeus/zio/v0.6.2/lib/i586-sl4-linux -lzio
-DCACHELIBS	+= -L/opt/products/lib/ -ldcap
+#DCACHELIBS	= -L/afs/desy.de/group/zeus/zacon/Released/zeus/zio/v0.6.2/lib/i586-sl4-linux -lzio
+#DCACHELIBS	+= -L/opt/products/lib/ -ldcap
 
 CXXFLAGS	+= $(ROOTFLAGS) 
 CXXFLAGS	+= $(FASTEJETINCLUDE)
-CXXFLAGS	+= $(CLHEPFLAGS)
+#CXXFLAGS	+= $(CLHEPFLAGS)
 
 #Distanation path
 DIST_DIR	= .
