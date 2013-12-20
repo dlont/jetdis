@@ -55,7 +55,10 @@ int main(int argc, char** argv)
 
 	// Read output destination folder from command line
         TString strOutputFolder( "./" );
-        if ( argc == 3 ) strOutputFolder = argv[2];
+        if ( argc == 3 ) {
+		strOutputFolder = argv[2];
+		strOutputFolder += "/";
+	}
 
 	TChain *ch = new TChain("orange");
 	//if( st.GetSampleName().find("testcn_05e") != string::npos )
