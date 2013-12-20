@@ -18,7 +18,8 @@ ROOTFLAGS	= $(shell root-config --nonew --cflags)
 
 ROOTLIBS	= $(shell root-config --nonew --libs)
 CERNLIBS	= $(shell cernlib packlib,mathlib,kernlib)
-FASTJETLIBS     = -L./fastjet/lib -lfastjet
+#FASTJETLIBS     = -L./fastjet/lib -lfastjet
+FASTJETLIBS     = ./fastjet/lib/libfastjet.a ./fastjet/lib/libfastjettools.a
 
 CXXFLAGS	+= $(ROOTFLAGS) 
 CXXFLAGS	+= $(FASTEJETINCLUDE)
@@ -54,7 +55,7 @@ all: main.exe
 
 main.exe: Dijets.o Analysis.o Analysis_Event.o Analysis_Initialize.o Analysis_BookHistograms.o Analysis_BookBranches.o Variables_$(RELINKTARG).o JetEvent.o \
           Cuts.o Excludedrunlist.o poltake.o runinfo.o Jets.o JetUserInfo.o JetSelectors.o EtCorrections.o EtTransformer.o DijetVariables.o TrijetVariables.o $(DEPENDENCIES) Settings.o tinystr.o tinyxml.o tinyxmlerror.o tinyxmlparser.o main.o
-	$(LD)	$(LDFLAGS) $(ROOTLIBS) $(FASTJETLIBS) $^ -o $@
+	$(LD)	$(LDFLAGS) $(ROOTLIBS) $^ $(FASTJETLIBS) -o $@
 
 .cpp.o:
 	$(CXX) $(CXXFLAGS) $(INCLUDE) -c $<
