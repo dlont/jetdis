@@ -33,6 +33,10 @@ EXEC=/afs/desy.de/user/d/diont/public/InclDiTri_DIS/main.exe
 CONFIGFILE=$1
 NAFOUTPUTDIR=$2
 
+# Create output folder
+echo "mkdir $NAFOUTPUTDIR"
+mkdir $NAFOUTPUTDIR
+
 # Execute program
 echo "$EXEC $CONFIGFILE $NAFOUTPUTDIR"
 $EXEC $CONFIGFILE $NAFOUTPUTDIR

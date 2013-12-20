@@ -93,13 +93,11 @@ then
 	let JID=0
 	for i in ./input/MC/*/config*_ecorrected_zvtxreweighted_tvrewap_q2rewap.xml
         do
-                #cp $i $confile
                 echo "submitting $i $etscale $etcorr $zvtxrew $tvrew $q2rew"
 		NAFOUTPUTDIR=$outputfolder/$sample
 		CONFIGFILE=$PWD/$i
 		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $zarahqueue -cwd $zarahscript $CONFIGFILE $NAFOUTPUTDIR
 		let JID=JID+1
-                #rm $confile
         done
 #en-scale syst
 elif [ "$sample" == "allmc_enscsyst" ]
