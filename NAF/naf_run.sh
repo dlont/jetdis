@@ -33,5 +33,6 @@ EXEC=/afs/desy.de/user/d/diont/public/InclDiTri_DIS/main.exe
 STEERING=/afs/desy.de/user/d/diont/public/InclDiTri_DIS/input/MC/LEPTO/config06e_lepto_ecorrected_zvtxreweighted_tvrewap_q2rewap.xml
 OUTPUTDIR=/afs/desy.de/group/zeus/pool/diont/
 
-$EXEC $STEERING
+# Execute program
+$EXEC $STEERING $OUTPUTDIR
 
