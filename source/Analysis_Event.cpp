@@ -490,7 +490,18 @@ INCLJETS:
                     
                     unfoldingVariables.njetstrue = (int)kt_injets_hadr_breit.size();
                     unfoldingVariables.njetsreco = (int)kt_injets_breit_corr.size();
-                    
+
+		    for (int ihadr = 0; ihadr < kt_injets_hadr_breit.size(); ihadr++) {
+			    unfoldingVariables.jet_et_true[ ihadr ] = kt_injets_hadr_breit[ ihadr ].perp();
+			    unfoldingVariables.jet_eta_true[ ihadr ] = kt_injets_hadr_breit[ ihadr ].eta();
+			    unfoldingVariables.jet_phi_true[ ihadr ] = kt_injets_hadr_breit[ ihadr ].phi();
+		    }                    
+		    for (int idet = 0; idet < kt_injets_breit_corr.size(); idet++) {
+			    unfoldingVariables.jet_et_reco[ idet ] = kt_injets_breit_corr[ idet ].perp();
+			    unfoldingVariables.jet_eta_reco[ idet ] = kt_injets_breit_corr[ idet ].eta();
+			    unfoldingVariables.jet_phi_reco[ idet ] = kt_injets_breit_corr[ idet ].phi();
+		    }                    
+
                     fUnfoldingTree -> Fill();
                     
                     hist = (TH1F*)(fHistArray) -> FindObject("h_q2_incl_CS_h_cp");
