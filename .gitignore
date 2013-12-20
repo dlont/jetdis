@@ -1,0 +1,17 @@
+# Compiled sources #
+####################
+*.o
+*.exe
+
+# ROOT files #
+####################
+*.root
+
+# FastJet installation files #
+##############################
+fastjet
+
+# NetBeans project files #
+##########################
+nbproject
+
