@@ -1,38 +1,31 @@
 #!/bin/bash
 ######################################################
 #
-#       zarah_run.sh
-#       script to make an archive of files
-#       for zarah farm
+#       naf_submit.sh
+#       script to submit naf jobs
 #
 #       Denys Lontkovskyi denys.lontkovskyi@desy.de
 #       Inna Makarenko inna.makarenko@desy.de
-#       10.11.11
-#       modified 09.02.2012
+#       created from zarah_run.sh: 10.11.11
+#       last modified: 09.02.2012
 #
 ######################################################
 sample=$1
 pref=$2
 outputfolder=/afs/desy.de/group/zeus/pool/diont/
 confile=./NAF/config.xml
-tarballfile=tarball.tgz
-zarahqueue=short.q
-zarahscript=./NAF/naf_run.sh
-etscale=etscalecorr*.xml
-etcorr=etcorr*.xml
-zvtxrew=zvtxreweighting_func_*.root
-tvrew=fit_func_tvrew_*.root
-q2rew=fit_func_q2rew_*.root
+nafqueue=short.q
+nafscript=./NAF/naf_run.sh
 
 if [ "$sample" == "alldata_beforecorr" ]
 then
 	let JID=0
         for i in ./input/DATA/before_corr/config*_data.xml
 	do
-                echo "submitting $i $etscale $etcorr $zvtxrew $tvrew $q2rew"
+                echo "submitting $i"
 		NAFOUTPUTDIR=$outputfolder/$sample\_$pref
 		CONFIGFILE=$PWD/$i
-		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $zarahqueue -cwd $zarahscript $CONFIGFILE $NAFOUTPUTDIR
+		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $nafqueue -cwd $nafscript $CONFIGFILE $NAFOUTPUTDIR
 		let JID=JID+1
 	done
 #DATA et LEPTO corr applied
@@ -41,10 +34,10 @@ then
 	let JID=0
         for i in ./input/DATA/after_corr/LEPTO/config*_data.xml
 	do
-                echo "submitting $i $etscale $etcorr $zvtxrew $tvrew $q2rew"
+                echo "submitting $i"
 		NAFOUTPUTDIR=$outputfolder/$sample\_$pref
 		CONFIGFILE=$PWD/$i
-		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $zarahqueue -cwd $zarahscript $CONFIGFILE $NAFOUTPUTDIR
+		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $nafqueue -cwd $nafscript $CONFIGFILE $NAFOUTPUTDIR
 		let JID=JID+1
 	done
 #DATA et ARIANDE corr applied
@@ -53,10 +46,10 @@ then
 	let JID=0
         for i in ./input/DATA/after_corr/ARIADNE/config*_data.xml
 	do
-                echo "submitting $i $etscale $etcorr $zvtxrew $tvrew $q2rew"
+                echo "submitting $i"
 		NAFOUTPUTDIR=$outputfolder/$sample\_$pref
 		CONFIGFILE=$PWD/$i
-		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $zarahqueue -cwd $zarahscript $CONFIGFILE $NAFOUTPUTDIR
+		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $nafqueue -cwd $nafscript $CONFIGFILE $NAFOUTPUTDIR
 		let JID=JID+1
 	done
 #MC before corrections
@@ -65,10 +58,10 @@ then
 	let JID=0
 	for i in ./input/MC/*/config*_lepto.xml
         do
-                echo "submitting $i $etscale $etcorr $zvtxrew $tvrew $q2rew"
+                echo "submitting $i"
 		NAFOUTPUTDIR=$outputfolder/$sample\_$pref
 		CONFIGFILE=$PWD/$i
-		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $zarahqueue -cwd $zarahscript $CONFIGFILE $NAFOUTPUTDIR
+		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $nafqueue -cwd $nafscript $CONFIGFILE $NAFOUTPUTDIR
 		let JID=JID+1
         done
 elif [ "$sample" == "allmc_ARIADNE_beforecorr" ]
@@ -76,10 +69,10 @@ then
 	let JID=0
 	for i in ./input/MC/*/config*_ariadne.xml
         do
-                echo "submitting $i $etscale $etcorr $zvtxrew $tvrew $q2rew"
+                echo "submitting $i"
 		NAFOUTPUTDIR=$outputfolder/$sample\_$pref
 		CONFIGFILE=$PWD/$i
-		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $zarahqueue -cwd $zarahscript $CONFIGFILE $NAFOUTPUTDIR
+		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $nafqueue -cwd $nafscript $CONFIGFILE $NAFOUTPUTDIR
 		let JID=JID+1
         done
 #MC after corrections and reweightings
@@ -88,10 +81,10 @@ then
 	let JID=0
 	for i in ./input/MC/*/config*_ecorrected_zvtxreweighted_tvrewap_q2rewap.xml
         do
-                echo "submitting $i $etscale $etcorr $zvtxrew $tvrew $q2rew"
+                echo "submitting $i"
 		NAFOUTPUTDIR=$outputfolder/$sample\_$pref
 		CONFIGFILE=$PWD/$i
-		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $zarahqueue -cwd $zarahscript $CONFIGFILE $NAFOUTPUTDIR
+		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $nafqueue -cwd $nafscript $CONFIGFILE $NAFOUTPUTDIR
 		let JID=JID+1
         done
 #en-scale syst
@@ -100,10 +93,10 @@ then
 	let JID=0
 	for i in ./input/MC/*/config*_enscsyst.xml
         do
-                echo "submitting $i $etscale $etcorr $zvtxrew $tvrew $q2rew"
+                echo "submitting $i"
 		NAFOUTPUTDIR=$outputfolder/$sample\_$pref
 		CONFIGFILE=$PWD/$i
-		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $zarahqueue -cwd $zarahscript $CONFIGFILE $NAFOUTPUTDIR
+		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $nafqueue -cwd $nafscript $CONFIGFILE $NAFOUTPUTDIR
 		let JID=JID+1
         done
 #tvrew syst
@@ -112,18 +105,19 @@ then
 	let JID=0
 	for i in ./input/MC/*/config*_ecorrected_zvtxreweighted_tvrewsystap_q2rewap.xml
         do
-                echo "submitting $i $etscale $etcorr $zvtxrew $tvrew $q2rew"
+                echo "submitting $i"
 		NAFOUTPUTDIR=$outputfolder/$sample\_$pref
 		CONFIGFILE=$PWD/$i
-		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $zarahqueue -cwd $zarahscript $CONFIGFILE $NAFOUTPUTDIR
+		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $nafqueue -cwd $nafscript $CONFIGFILE $NAFOUTPUTDIR
 		let JID=JID+1
         done
 #Single file
 else
-
-	echo "submitting $sample $etscale $etcorr $zvtxrew $tvrew $q2rew"
+	echo "ATTENTION: This option works only if config.xml file is in the same folder as main.exe"
+	echo "ATTENTION: Copy config.xml to that folder"
+	echo "submitting $sample"
 	NAFOUTPUTDIR=$outputfolder/$sample\_$pref
 	CONFIGFILE=$PWD/$sample
-	qsub -N $sample\_$pref -l os=sld6 -q $zarahqueue -cwd $zarahscript $CONFIGFILE $NAFOUTPUTDIR
+	qsub -N $sample\_$pref -l os=sld6 -q $nafqueue -cwd $nafscript $CONFIGFILE $NAFOUTPUTDIR
 fi
 
