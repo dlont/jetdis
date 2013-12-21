@@ -249,21 +249,21 @@ int Analysis::Initialize()
         
         MiniUnfoldingFile = new TFile( strMiniUnfoldFileName, "RECREATE" );
         fUnfoldingTree = new TTree("Unfolding", "Unfolding input");
-        fUnfoldingTree->Branch( "q2true", &unfoldingVariables.q2true, "Generated Q2 spectrum/F");
-        fUnfoldingTree->Branch( "q2reco", &unfoldingVariables.q2reco, "Reconstructed Q2 spectrum/F");
+        fUnfoldingTree->Branch( "q2true", &unfoldingVariables.q2true, "q2true/F");
+        fUnfoldingTree->Branch( "q2reco", &unfoldingVariables.q2reco, "q2reco/F");
         
-        fUnfoldingTree->Branch( "ytrue", &unfoldingVariables.ytrue, "Generated y spectrum/F");
-        fUnfoldingTree->Branch( "yreco", &unfoldingVariables.yreco, "Reconstructed y spectrum/F");
+        fUnfoldingTree->Branch( "ytrue", &unfoldingVariables.ytrue, "ytrue/F");
+        fUnfoldingTree->Branch( "yreco", &unfoldingVariables.yreco, "yreco/F");
         
-        fUnfoldingTree->Branch( "njetstrue", &unfoldingVariables.njetstrue, "Number of hadron level jets/I");
-        fUnfoldingTree->Branch( "etjettrue", &unfoldingVariables.jet_et_true[0], "Hadron level jet ET in the breit[njetstrue]/F");
-        fUnfoldingTree->Branch( "etajettrue", &unfoldingVariables.jet_eta_true[0], "Hadron level jet ETA in the breit[njetstrue]/F");
-        fUnfoldingTree->Branch( "phijettrue", &unfoldingVariables.jet_phi_true[0], "Hadron level jet PHI in the breit[njetstrue]/F");
+        fUnfoldingTree->Branch( "njetstrue", &unfoldingVariables.njetstrue, "njetstrue/I");
+        fUnfoldingTree->Branch( "etjettrue", &unfoldingVariables.jet_et_true[0], "etjettrue[njetstrue]/F");
+        fUnfoldingTree->Branch( "etajettrue", &unfoldingVariables.jet_eta_true[0], "etajettrue[njetstrue]/F");
+        fUnfoldingTree->Branch( "phijettrue", &unfoldingVariables.jet_phi_true[0], "phijettrue[njetstrue]/F");
         
-        fUnfoldingTree->Branch( "njetsreco", &unfoldingVariables.njetsreco, "Number of detector level jets/I");
-        fUnfoldingTree->Branch( "etjetreco", &unfoldingVariables.jet_et_reco[0], "Detector level jet ET in the breit[njetsreco]/F");
-        fUnfoldingTree->Branch( "etajetreco", &unfoldingVariables.jet_eta_reco[0], "Detector level jet ETA in the breit[njetsreco]/F");
-        fUnfoldingTree->Branch( "phijetreco", &unfoldingVariables.jet_phi_reco[0], "Detector level jet PHI in the breit[njetsreco]/F");
+        fUnfoldingTree->Branch( "njetsreco", &unfoldingVariables.njetsreco, "njetsreco/I");
+        fUnfoldingTree->Branch( "etjetreco", &unfoldingVariables.jet_et_reco[0], "etjetreco[njetsreco]/F");
+        fUnfoldingTree->Branch( "etajetreco", &unfoldingVariables.jet_eta_reco[0], "etajetreco[njetsreco]/F");
+        fUnfoldingTree->Branch( "phijetreco", &unfoldingVariables.jet_phi_reco[0], "phijetreco[njetsreco]/F");
         
 	//!Book histograms
 	BookHistograms();
