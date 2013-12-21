@@ -1,0 +1,14 @@
+INSTALLATION INSTRUCTION
+========================
+
+Get FastJet and install it into the fastjet folder under the foldet containing analysis codes.
+Such that the analysis folder contains 
+
+fastjet
+  |
+  |---> bin
+  |---> include
+  |---> lib
+
+Alternative way would be to adjust FastJet installation path in Makefile.
+
