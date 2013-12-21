@@ -29,12 +29,11 @@ then
 	let JID=0
         for i in ./input/DATA/before_corr/config*_data.xml
 	do
-		cp $i $confile
-		echo "submitting $i $etscale $etcorr"
-		#zarah-jobsub -q $zarahqueue -s $zarahscript $tarballfile $confile
-		zarah-jobsub -J $sample\_$pref\_$JID -q $zarahqueue -s $zarahscript ./main.exe ./lib/libfastjet.so.0 ./luminosity_file.txt $etscale $etcorr $confile
+                echo "submitting $i $etscale $etcorr $zvtxrew $tvrew $q2rew"
+		NAFOUTPUTDIR=$outputfolder/$sample\_$pref
+		CONFIGFILE=$PWD/$i
+		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $zarahqueue -cwd $zarahscript $CONFIGFILE $NAFOUTPUTDIR
 		let JID=JID+1
-		rm $confile
 	done
 #DATA et LEPTO corr applied
 elif [ "$sample" == "alldata_aftercorr_LEPTO" ]
@@ -42,12 +41,11 @@ then
 	let JID=0
         for i in ./input/DATA/after_corr/LEPTO/config*_data.xml
 	do
-		cp $i $confile
-		echo "submitting $i $etscale $etcorr"
-		#zarah-jobsub -q $zarahqueue -s $zarahscript $tarballfile $confile
-		zarah-jobsub -J $sample\_$pref\_$JID -q $zarahqueue -s $zarahscript ./main.exe ./lib/libfastjet.so.0 ./luminosity_file.txt $etscale $etcorr $confile
+                echo "submitting $i $etscale $etcorr $zvtxrew $tvrew $q2rew"
+		NAFOUTPUTDIR=$outputfolder/$sample\_$pref
+		CONFIGFILE=$PWD/$i
+		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $zarahqueue -cwd $zarahscript $CONFIGFILE $NAFOUTPUTDIR
 		let JID=JID+1
-		rm $confile
 	done
 #DATA et ARIANDE corr applied
 elif [ "$sample" == "alldata_aftercorr_ARIADNE" ]
@@ -55,12 +53,11 @@ then
 	let JID=0
         for i in ./input/DATA/after_corr/ARIADNE/config*_data.xml
 	do
-		cp $i $confile
-		echo "submitting $i $etscale $etcorr"
-		#zarah-jobsub -q $zarahqueue -s $zarahscript $tarballfile $confile
-		zarah-jobsub -J $sample\_$pref\_$JID -q $zarahqueue -s $zarahscript ./main.exe ./lib/libfastjet.so.0 ./luminosity_file.txt $etscale $etcorr $confile
+                echo "submitting $i $etscale $etcorr $zvtxrew $tvrew $q2rew"
+		NAFOUTPUTDIR=$outputfolder/$sample\_$pref
+		CONFIGFILE=$PWD/$i
+		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $zarahqueue -cwd $zarahscript $CONFIGFILE $NAFOUTPUTDIR
 		let JID=JID+1
-		rm $confile
 	done
 #MC before corrections
 elif [ "$sample" == "allmc_LEPTO_beforecorr" ]
@@ -68,24 +65,22 @@ then
 	let JID=0
 	for i in ./input/MC/*/config*_lepto.xml
         do
-                cp $i $confile
-                echo "submitting $i $etscale $etcorr"
-                #zarah-jobsub -q $zarahqueue -s $zarahscript $tarballfile $confile
-                zarah-jobsub -J $sample\_$pref\_$JID -q $zarahqueue -s $zarahscript ./main.exe ./lib/libfastjet.so.0 ./luminosity_file.txt $etscale $etcorr $confile
+                echo "submitting $i $etscale $etcorr $zvtxrew $tvrew $q2rew"
+		NAFOUTPUTDIR=$outputfolder/$sample\_$pref
+		CONFIGFILE=$PWD/$i
+		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $zarahqueue -cwd $zarahscript $CONFIGFILE $NAFOUTPUTDIR
 		let JID=JID+1
-                rm $confile
         done
 elif [ "$sample" == "allmc_ARIADNE_beforecorr" ]
 then
 	let JID=0
 	for i in ./input/MC/*/config*_ariadne.xml
         do
-                cp $i $confile
-                echo "submitting $i $etscale $etcorr"
-                #zarah-jobsub -q $zarahqueue -s $zarahscript $tarballfile $confile
-                zarah-jobsub -J $sample\_$pref\_$JID -q $zarahqueue -s $zarahscript ./main.exe ./lib/libfastjet.so.0 ./luminosity_file.txt $etscale $etcorr $confile
+                echo "submitting $i $etscale $etcorr $zvtxrew $tvrew $q2rew"
+		NAFOUTPUTDIR=$outputfolder/$sample\_$pref
+		CONFIGFILE=$PWD/$i
+		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $zarahqueue -cwd $zarahscript $CONFIGFILE $NAFOUTPUTDIR
 		let JID=JID+1
-                rm $confile
         done
 #MC after corrections and reweightings
 elif [ "$sample" == "allmc_corrected" ]
@@ -94,7 +89,7 @@ then
 	for i in ./input/MC/*/config*_ecorrected_zvtxreweighted_tvrewap_q2rewap.xml
         do
                 echo "submitting $i $etscale $etcorr $zvtxrew $tvrew $q2rew"
-		NAFOUTPUTDIR=$outputfolder/$sample
+		NAFOUTPUTDIR=$outputfolder/$sample\_$pref
 		CONFIGFILE=$PWD/$i
 		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $zarahqueue -cwd $zarahscript $CONFIGFILE $NAFOUTPUTDIR
 		let JID=JID+1
@@ -105,12 +100,11 @@ then
 	let JID=0
 	for i in ./input/MC/*/config*_enscsyst.xml
         do
-                cp $i $confile
                 echo "submitting $i $etscale $etcorr $zvtxrew $tvrew $q2rew"
-                #zarah-jobsub -q $zarahqueue -s $zarahscript $tarballfile $confile
-                zarah-jobsub -J $sample\_$pref\_$JID -q $zarahqueue -s $zarahscript ./main.exe ./lib/libfastjet.so.0 ./luminosity_file.txt $etscale $etcorr $confile $zvtxrew $tvrew $q2rew
+		NAFOUTPUTDIR=$outputfolder/$sample\_$pref
+		CONFIGFILE=$PWD/$i
+		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $zarahqueue -cwd $zarahscript $CONFIGFILE $NAFOUTPUTDIR
 		let JID=JID+1
-                rm $confile
         done
 #tvrew syst
 elif [ "$sample" == "allmc_tvrewsyst" ]
@@ -118,17 +112,18 @@ then
 	let JID=0
 	for i in ./input/MC/*/config*_ecorrected_zvtxreweighted_tvrewsystap_q2rewap.xml
         do
-                cp $i $confile
                 echo "submitting $i $etscale $etcorr $zvtxrew $tvrew $q2rew"
-                #zarah-jobsub -q $zarahqueue -s $zarahscript $tarballfile $confile
-                zarah-jobsub -J $sample\_$pref\_$JID -q $zarahqueue -s $zarahscript ./main.exe ./lib/libfastjet.so.0 ./luminosity_file.txt $etscale $etcorr $confile $zvtxrew $tvrew $q2rew
+		NAFOUTPUTDIR=$outputfolder/$sample\_$pref
+		CONFIGFILE=$PWD/$i
+		qsub -N $sample\_$pref\_$JID -l os=sld6 -q $zarahqueue -cwd $zarahscript $CONFIGFILE $NAFOUTPUTDIR
 		let JID=JID+1
-                rm $confile
         done
 #Single file
 else
-	cp $sample $confile
-	echo "submitting $i $etscale $etcorr"
-	zarah-jobsub -q $zarahqueue -s $zarahscript ./main.exe ./lib/libfastjet.so.0 ./luminosity_file.txt $etscale $etcorr $confile
-        rm $confile
+
+	echo "submitting $sample $etscale $etcorr $zvtxrew $tvrew $q2rew"
+	NAFOUTPUTDIR=$outputfolder/$sample\_$pref
+	CONFIGFILE=$PWD/$sample
+	qsub -N $sample\_$pref\_$JID -l os=sld6 -q $zarahqueue -cwd $zarahscript $CONFIGFILE $NAFOUTPUTDIR
 fi
+
