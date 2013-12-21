@@ -256,14 +256,14 @@ int Analysis::Initialize()
         fUnfoldingTree->Branch( "yreco", &unfoldingVariables.yreco, "Reconstructed y spectrum/F");
         
         fUnfoldingTree->Branch( "njetstrue", &unfoldingVariables.njetstrue, "Number of hadron level jets/I");
-        fUnfoldingTree->Branch( "etjettrue[njetstrue]", &unfoldingVariables.jet_et_true[0], "Hadron level jet ET in the breit/F");
-        fUnfoldingTree->Branch( "etajettrue[njetstrue]", &unfoldingVariables.jet_eta_true[0], "Hadron level jet ETA in the breit/F");
-        fUnfoldingTree->Branch( "phijettrue[njetstrue]", &unfoldingVariables.jet_phi_true[0], "Hadron level jet PHI in the breit/F");
+        fUnfoldingTree->Branch( "etjettrue", &unfoldingVariables.jet_et_true[0], "Hadron level jet ET in the breit[njetstrue]/F");
+        fUnfoldingTree->Branch( "etajettrue", &unfoldingVariables.jet_eta_true[0], "Hadron level jet ETA in the breit[njetstrue]/F");
+        fUnfoldingTree->Branch( "phijettrue", &unfoldingVariables.jet_phi_true[0], "Hadron level jet PHI in the breit[njetstrue]/F");
         
         fUnfoldingTree->Branch( "njetsreco", &unfoldingVariables.njetsreco, "Number of detector level jets/I");
-        fUnfoldingTree->Branch( "etjetreco[njetsreco]", &unfoldingVariables.jet_et_reco[0], "Detector level jet ET in the breit/F");
-        fUnfoldingTree->Branch( "etajetreco[njetsreco]", &unfoldingVariables.jet_eta_reco[0], "Detector level jet ETA in the breit/F");
-        fUnfoldingTree->Branch( "phijetreco[njetsreco]", &unfoldingVariables.jet_phi_reco[0], "Detector level jet PHI in the breit/F");
+        fUnfoldingTree->Branch( "etjetreco", &unfoldingVariables.jet_et_reco[0], "Detector level jet ET in the breit[njetsreco]/F");
+        fUnfoldingTree->Branch( "etajetreco", &unfoldingVariables.jet_eta_reco[0], "Detector level jet ETA in the breit[njetsreco]/F");
+        fUnfoldingTree->Branch( "phijetreco", &unfoldingVariables.jet_phi_reco[0], "Detector level jet PHI in the breit[njetsreco]/F");
         
 	//!Book histograms
 	BookHistograms();
