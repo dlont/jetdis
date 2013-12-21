@@ -124,6 +124,6 @@ else
 	echo "submitting $sample $etscale $etcorr $zvtxrew $tvrew $q2rew"
 	NAFOUTPUTDIR=$outputfolder/$sample\_$pref
 	CONFIGFILE=$PWD/$sample
-	qsub -N $sample\_$pref\_$JID -l os=sld6 -q $zarahqueue -cwd $zarahscript $CONFIGFILE $NAFOUTPUTDIR
+	qsub -N $sample\_$pref -l os=sld6 -q $zarahqueue -cwd $zarahscript $CONFIGFILE $NAFOUTPUTDIR
 fi
 
