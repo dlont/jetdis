@@ -13,9 +13,9 @@
 sample=$1
 pref=$2
 outputfolder=/afs/desy.de/group/zeus/pool/diont/
-confile=./NAF/config.xml
+confile=./naf/config.xml
 nafqueue=short.q
-nafscript=./NAF/naf_run.sh
+nafscript=./naf/naf_run.sh
 
 if [ "$sample" == "alldata_beforecorr" ]
 then
